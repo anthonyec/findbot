@@ -4,7 +4,7 @@ const controller = Botkit.slackbot({
 });
 
 controller.spawn({
-  token: 'xoxb-91842795602-FHiU40tQBBM5I4omrTGH69YG',
+  token: process.env.SNBOT_TOKEN || '',
 }).startRTM();
 
 module.exports.Botkit = Botkit;
