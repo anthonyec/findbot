@@ -17,14 +17,26 @@ fuzzySearch.addModule(indexOfFS({'minTermLength': 3, 'maxIterations': 500, 'fact
 fuzzySearch.addModule(wordCountFS({'maxWordTolerance': 3, 'factor': 1}));
 
 exports.search = function(query) {
-  let results =  fuzzySearch.search(query);
+  const keywords = query.split(/\s/g);
+
+  const strictFilter = projects.filter((project) => {
+    const matches = keywords.map((keyword) => {
+      const name = project.name.toLowerCase();
+
+      return name.includes(keyword);
+    });
+
+    return !matches.includes(false);
+  });
+
+  if (strictFilter.length && (keywords.length >= 2 || parseInt(query))) {
+    return strictFilter.filter((result => result.depth !== 0));
+  }
+
+  let results = fuzzySearch.search(query);
 
   if (!results) {
     return [];
-  }
-
-  if (results.length > 5) {
-    results = results.slice(0, 5);
   }
 
   const projectResults = results.map((result) => {

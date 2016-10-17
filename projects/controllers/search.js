@@ -2,22 +2,32 @@ const projects = require('../projects');
 const searchPhrase = require('../phrases').search;
 
 function replyWithSearch(bot, message, query) {
-  const results = projects.search(query);
+  let results = projects.search(query);
 
   if (!results.length) {
-    bot.reply(message, `I looked for "${query}" on the server but could not find anything :eyes:`);
+    bot.reply(message, `I looked for *"${query}"* on the server but could not find anything :eyes:`);
     return;
   }
+
+  if (results.length > 3) {
+    results = results.slice(0, 3);
+  }
+
+  results = results.sort((a, b) => {
+    return b.id - a.id;
+  });
 
   const list = results.reduce((mem, result) => {
     const server = 'afp://SignalNoise._afpovertcp._tcp.local/';
     const path = result.path.replace('/Volumes/', '').replace(/\s/g,'%20');
 
-    return mem + `${server}${path}\n`;
+    return mem + `:open_file_folder: ${server}${path}\n`;
   }, '');
 
-  const response = `I searched for "${query}" on the server. Here's what I found:\n${list}`;
+  // const response = `I searched for *"${query}"* on the server. Here's what I found:\n${list}`;
+  const response = `Here's what I found for *"${query}"* on the server:\n${list}`;
 
+  bot.startTyping(message);
   bot.reply(message, response);
 }
 
