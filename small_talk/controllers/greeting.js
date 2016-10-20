@@ -1,9 +1,22 @@
 const greetings = [
-  'Hey there!',
-  'Hi',
-  'Hello',
+  'hey',
+  'hi',
+  'hello',
 ];
 
+function getRandomGreeting() {
+  const index = Math.floor(Math.random() * greetings.length);
+  return greetings[index];
+}
+
 module.exports = (bot, message) => {
-  bot.reply(message, 'Hey, how can I help?');
+  const greeting = getRandomGreeting();
+  const user = message.user;
+
+  bot.api.users.info({user: message.user}, (error, response) => {
+    const {name, real_name} = response.user;
+    const firstName = real_name.split(' ')[0];
+
+    bot.reply(message, `${greeting} ${firstName}, how can I help?`);
+  });
 };

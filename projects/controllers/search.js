@@ -20,15 +20,19 @@ function replyWithSearch(bot, message, query) {
   const list = results.reduce((mem, result) => {
     const server = 'afp://SignalNoise._afpovertcp._tcp.local/';
     const path = result.path.replace('/Volumes/', '').replace(/\s/g,'%20');
+    const link = `<${server}${path}|${result.name}>`;
 
-    return mem + `:open_file_folder: ${server}${path}\n`;
+    return mem + `:open_file_folder: ${link}\n`;
   }, '');
 
   // const response = `I searched for *"${query}"* on the server. Here's what I found:\n${list}`;
-  const response = `Here's what I found for *"${query}"* on the server:\n${list}`;
+  const response = `here's what I found for *"${query}"* on the server:\n${list}`;
 
   bot.startTyping(message);
-  bot.reply(message, response);
+  bot.reply(message, {
+    text: response,
+    attachments: [],
+  });
 }
 
 module.exports = (bot, message) => {
@@ -38,7 +42,7 @@ module.exports = (bot, message) => {
 
   if (!query.length) {
     bot.startConversation(message, function(err, convo) {
-      convo.ask('What project should I search for?', function(response, convo) {
+      convo.ask('what project should I search for?', function(response, convo) {
         replyWithSearch(bot, message, response.text);
         convo.stop();
       });

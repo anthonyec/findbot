@@ -1,3 +1,5 @@
-module.exports.greeting = ['hey', 'hello', 'bonjour', 'hi', 'greetings'];
-module.exports.goodbye = ['bye', 'see ya', 'goodnight', 'goodbye'];
-module.exports.help = ['help'];
+module.exports.greeting = [/^(hey|hello|bonjour|hi|greetings|good morning|morning|yo)/];
+module.exports.goodbye = [/^(bye|see ya|goodnight|good\s?bye|ttyl)/];
+module.exports.thanks = [/^(\:thumbsup\:|thanks|thank\s?\-?you|ty|thx)/];
+module.exports.help = [/^(help)(\sme)?$/];
+module.exports.unknown = [/(.*)/];
