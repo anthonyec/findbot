@@ -1,3 +1,5 @@
+const template = require('../../templates');
+
 const goodbyes = [
   'See ya',
   'TTYL',
@@ -14,5 +16,8 @@ function getRandomGoodbye() {
 
 module.exports = (bot, message) => {
   const goodbye = getRandomGoodbye();
-  bot.reply(message, goodbye);
+
+  template('goodbye', { goodbye }).then((output) => {
+    bot.reply(message, output);
+  });
 };

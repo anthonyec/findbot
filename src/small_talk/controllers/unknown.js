@@ -1,3 +1,7 @@
+const template = require('../../templates');
+
 module.exports = (bot, message) => {
-  bot.reply(message, 'Hmm, I don\'t understand that');
+  template('unknown').then((output) => {
+    bot.reply(message, output);
+  });
 };

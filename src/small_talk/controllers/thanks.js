@@ -1,3 +1,5 @@
+const template = require('../../templates');
+
 const thanks = [
   'No problem',
   'Anytime',
@@ -11,5 +13,8 @@ function getRandomThanks() {
 
 module.exports = (bot, message) => {
   const thank = getRandomThanks();
-  bot.reply(message, thank);
+
+  template('thanks', { thank }).then((output) => {
+    bot.reply(message, output);
+  });
 };

@@ -1,40 +1,44 @@
 const request = require('request');
+const template = require('../../templates');
 
 const searchPhrase = require('../phrases').keyword;
 
 const SEARCH_RESULT_LIMIT = 20;
 
-function makeSearchList(results) {
-  return results.reduce((mem, result) => {
-    const server = 'afp://SignalNoise._afpovertcp._tcp.local';
+function cleanResults(results) {
+  return results.map((result) => {
+    const newResult = result;
 
-    const path = result.path.replace(/\s/g, '%20');
-    const link = `<${server}${path}|${result.name}>`;
+    newResult.path = result.path.replace(/\s/g, '%20');
 
-    return `${mem}:open_file_folder: ${link}\n`;
-  }, '');
+    return newResult;
+  });
 }
 
 function replyWithSearch(bot, message, query) {
-  const endpoint = `http://127.0.0.1:3001/search?q=${query}&limit=${SEARCH_RESULT_LIMIT}`;
+  const url = 'http://127.0.0.1:3001/search?q=';
+  const endpoint = `${url}${query}&limit=${SEARCH_RESULT_LIMIT}`;
 
   request(endpoint, (err, response, body) => {
     if (err || response.statusCode !== 200) {
-      return console.log('Error', err, response.statusCode);
+      return console.log('[error]', err, response.statusCode);
     }
 
-    const results = JSON.parse(body).results;
+    let results = JSON.parse(body).results;
 
     if (!results.length) {
-      return bot.reply(message, `I looked for *"${query}"* on the server but could not find anything :eyes:`);
+      template('no_results', { query }).then((output) => {
+        return bot.reply(message, output);
+      });
     }
 
-    const list = makeSearchList(results);
-    const responseMsg = `Here's what I found for *"${query}"* on the server:\n${list}`;
+    results = cleanResults(results);
 
-    return bot.reply(message, {
-      text: responseMsg,
-      attachments: [],
+    return template('results', { query, results }).then((output) => {
+      return bot.reply(message, {
+        text: output,
+        attachments: [],
+      });
     });
   });
 

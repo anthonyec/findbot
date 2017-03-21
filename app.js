@@ -11,8 +11,6 @@ require('./src/projects');
 // Middleware that affects each incoming message
 const lowercaseMiddleware = require('./src/middleware/lowercase');
 const unescapeMiddleware = require('./src/middleware/unescape');
-const logMiddleware = require('./src/middleware/log');
 
 Botkit.controller.middleware.receive.use(lowercaseMiddleware);
 Botkit.controller.middleware.receive.use(unescapeMiddleware);
-Botkit.controller.middleware.receive.use(logMiddleware);

@@ -1,3 +1,5 @@
+const template = require('../../templates');
+
 const greetings = [
   'Hey',
   'Hi',
@@ -17,6 +19,8 @@ module.exports = (bot, message) => {
     const { real_name } = response.user;
     const firstName = real_name.split(' ')[0];
 
-    bot.reply(message, `${greeting} ${firstName}, how can I help?`);
+    template('greeting', { greeting, firstName }).then((output) => {
+      bot.reply(message, output);
+    });
   });
 };
