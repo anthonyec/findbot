@@ -1,7 +1,7 @@
 const greetings = [
-  'hey',
-  'hi',
-  'hello',
+  'Hey',
+  'Hi',
+  'Hello',
 ];
 
 function getRandomGreeting() {

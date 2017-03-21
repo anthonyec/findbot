@@ -1,8 +1,8 @@
 {
   "dependencies": {
     "botkit": "^0.4.0",
+    "dashbot": "^0.8.4",
     "fuzzysearch-js": "^0.2.0",
-    "knex": "^0.11.10",
-    "bookshelf": "^0.10.0",
+    "request": "^2.79.0"
   }
 }

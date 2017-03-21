@@ -1,9 +1,10 @@
 const goodbyes = [
-  'see ya',
+  'See ya',
   'TTYL',
-  'bye',
-  'ok, see ya',
-  'good luck',
+  'Bye',
+  'Bye bye',
+  'Ok, see ya',
+  'Good luck',
 ];
 
 function getRandomGoodbye() {

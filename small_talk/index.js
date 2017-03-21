@@ -8,8 +8,9 @@ const unknownController = require('./controllers/unknown');
 
 const phrases = require('./phrases');
 
-controller.hears(phrases.help, ['direct_message', 'direct_mention'], helpController);
-controller.hears(phrases.greeting, ['direct_message', 'direct_mention'], greetingController);
-controller.hears(phrases.goodbye, ['direct_message', 'direct_mention'], goodbyeController);
-controller.hears(phrases.thanks, ['direct_message', 'direct_mention'], thanksController);
-controller.hears(phrases.unknown, ['direct_message', 'direct_mention'], unknownController);
+const eventTypes = ['direct_message', 'direct_mention'];
+
+controller.hears(phrases.help, eventTypes, helpController);
+controller.hears(phrases.greeting, eventTypes, greetingController);
+controller.hears(phrases.goodbye, eventTypes, goodbyeController);s
+controller.hears(phrases.thanks, eventTypes, thanksController);

@@ -1,7 +1,7 @@
 const thanks = [
-  'no problem',
-  'anytime',
-  'happy to help',
+  'No problem',
+  'Anytime',
+  'Happy to help',
 ];
 
 function getRandomThanks() {

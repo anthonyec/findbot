@@ -2,24 +2,26 @@ const Botkit = require('botkit');
 
 const controller = Botkit.slackbot({
   debug: false,
+  stats_optout: true,
 });
 
-let bot;
+const bot = controller.spawn({
+  token: process.env.SNBOT_TOKEN || '',
+  retry: 10,
+});
 
-function spawn() {
-  bot = controller.spawn({
-    token: process.env.SNBOT_TOKEN || '',
-  }).startRTM();
-}
+bot.startRTM((err) => {
+  if (err) {
+    console.log('[error]');
+    throw Error(err);
+  }
+
+  console.log('[connected]');
+});
 
 controller.on('rtm_close', (e) => {
-  setTimeout(() => {
-    console.log('Retry...');
-    spawn();
-  }, 5000);
+  console.log('[rtm_close]');
 });
-
-spawn();
 
 module.exports.Botkit = Botkit;
 module.exports.controller = controller;

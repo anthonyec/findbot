@@ -3,4 +3,6 @@ const searchController = require('./controllers/search');
 
 const phrases = require('./phrases');
 
-controller.hears([phrases.search], ['direct_message', 'direct_mention'], searchController);
+const eventTypes = ['direct_message', 'direct_mention'];
+
+controller.hears([phrases.search], eventTypes, searchController);

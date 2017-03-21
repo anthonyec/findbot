@@ -1,3 +1,3 @@
 module.exports = (bot, message) => {
-  bot.reply(message, `hmm, sorry I don't understand that`);
+  bot.reply(message, `Hmm, I don't understand that`);
 };

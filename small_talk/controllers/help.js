@@ -11,6 +11,7 @@ module.exports = (bot, message) => {
       }, Math.random() * 500);
 
       break;
+
     default:
       bot.reply(message, 'I\'m not that smart right now but I can find project folders for you');
       bot.reply(message, 'Send me a message like `find drax`');

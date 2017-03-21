@@ -1,0 +1,4 @@
+Hey! I can help you find project folders on the server. Here's how:
+`find drax` :point_left: simply type *find* followed by your query
+`find 15 ubs conf` :point_left: include bits of the project name for more accurate results
+`find sound srvay` :point_left: don't worry about spelling
