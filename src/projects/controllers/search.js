@@ -31,6 +31,8 @@ function replyWithSearch(bot, message, query) {
       template('no_results', { query }).then((output) => {
         return bot.reply(message, output);
       });
+
+      return false;
     }
 
     results = cleanResults(results);
