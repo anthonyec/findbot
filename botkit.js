@@ -19,7 +19,7 @@ bot.startRTM((err) => {
   console.log('[connected]');
 });
 
-controller.on('rtm_close', (e) => {
+controller.on('rtm_close', () => {
   console.log('[rtm_close]');
 });
 

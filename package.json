@@ -1,7 +1,12 @@
 {
+  "scripts": {
+    "lint": "eslint --ext .js ./",
+    "lint:fix": "eslint --fix .js ./"
+  },
   "dependencies": {
     "botkit": "^0.4.0",
     "dashbot": "^0.8.4",
+    "eslint": "^3.18.0",
     "fuzzysearch-js": "^0.2.0",
     "request": "^2.79.0"
   }

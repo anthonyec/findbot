@@ -11,7 +11,5 @@ function getRandomThanks() {
 
 module.exports = (bot, message) => {
   const thank = getRandomThanks();
-  const user = message.user;
-
   bot.reply(message, thank);
 };

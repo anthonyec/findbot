@@ -4,4 +4,4 @@ module.exports = (bot, message, next) => {
   }
 
   next();
-}
+};

@@ -8,14 +8,14 @@ function makeSearchList(results) {
   return results.reduce((mem, result) => {
     const server = 'afp://SignalNoise._afpovertcp._tcp.local';
 
-    const path = result.path.replace(/\s/g,'%20');
+    const path = result.path.replace(/\s/g, '%20');
     const link = `<${server}${path}|${result.name}>`;
 
-    return mem + `:open_file_folder: ${link}\n`;
+    return `${mem}:open_file_folder: ${link}\n`;
   }, '');
 }
 
-function replyWithSearch(bot, message, raw) {
+function replyWithSearch(bot, message, query) {
   const endpoint = `http://127.0.0.1:3001/search?q=${query}&limit=${SEARCH_RESULT_LIMIT}`;
 
   request(endpoint, (err, response, body) => {
@@ -26,14 +26,13 @@ function replyWithSearch(bot, message, raw) {
     const results = JSON.parse(body).results;
 
     if (!results.length) {
-      bot.reply(message, `I looked for *"${query}"* on the server but could not find anything :eyes:`);
-      return;
+      return bot.reply(message, `I looked for *"${query}"* on the server but could not find anything :eyes:`);
     }
 
     const list = makeSearchList(results);
     const responseMsg = `Here's what I found for *"${query}"* on the server:\n${list}`;
 
-    bot.reply(message, {
+    return bot.reply(message, {
       text: responseMsg,
       attachments: [],
     });
@@ -48,13 +47,12 @@ module.exports = (bot, message) => {
   const query = phrase === '' ? text : text.split(phrase)[1];
 
   if (!query.length) {
-    bot.startConversation(message, function(err, convo) {
-      convo.ask('What project should I search for?', function(response, convo) {
+    bot.startConversation(message, (err, convo) => {
+      return convo.ask('What project should I search for?', (response) => {
         replyWithSearch(bot, message, response.text);
-        convo.stop();
+        return convo.stop();
       });
     });
-
     return;
   }
 

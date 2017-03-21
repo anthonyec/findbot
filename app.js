@@ -1,12 +1,12 @@
 const Botkit = require('./botkit');
-const analytics = require('./analytics');
+require('./analytics');
 
 // Specific chat topic controllers
 // Handle small talk phrases like hey, bye and stuff
-const smallTalk = require('./small_talk');
+require('./small_talk');
 
 // Handle searching the server using sn-project-search API
-const projects = require('./projects');
+require('./projects');
 
 // Middleware that affects each incoming message
 const lowercaseMiddleware = require('./middleware/lowercase');

@@ -14,7 +14,5 @@ function getRandomGoodbye() {
 
 module.exports = (bot, message) => {
   const goodbye = getRandomGoodbye();
-  const user = message.user;
-
   bot.reply(message, goodbye);
 };
