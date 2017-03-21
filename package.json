@@ -1,7 +1,10 @@
 {
   "scripts": {
+    "start": "NODE_ENV=development node app.js",
+    "deploy": "echo 'Deploy script coming sooon'",
     "lint": "eslint --ext .js ./",
-    "lint:fix": "eslint --fix .js ./"
+    "lint:fix": "eslint --fix .js ./",
+    "test": "mocha src/**/**.spec.js"
   },
   "dependencies": {
     "botkit": "^0.4.0",
@@ -9,5 +12,14 @@
     "eslint": "^3.18.0",
     "fuzzysearch-js": "^0.2.0",
     "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "faker": "^4.1.0",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=6.7.0"
   }
 }
