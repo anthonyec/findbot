@@ -1,6 +1,8 @@
+const debug = require('debug')('findbot');
+
 module.exports = (bot, message, next) => {
   if (message.type === 'message' && !message.replyTo) {
-    console.log(message.text);
+    debug(message.text);
   }
 
   next();

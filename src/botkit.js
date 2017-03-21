@@ -1,3 +1,4 @@
+const debug = require('debug')('findbot');
 const Botkit = require('botkit');
 
 const controller = Botkit.slackbot({
@@ -12,15 +13,15 @@ const bot = controller.spawn({
 
 bot.startRTM((err) => {
   if (err) {
-    console.log('[error]');
+    debug('[error]');
     throw Error(err);
   }
 
-  console.log('[connected]');
+  debug('[connected]');
 });
 
 controller.on('rtm_close', () => {
-  console.log('[rtm_close]');
+  debug('[rtm_close]');
 });
 
 module.exports.Botkit = Botkit;

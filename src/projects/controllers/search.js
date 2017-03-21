@@ -1,3 +1,4 @@
+const debug = require('debug')('findbot');
 const request = require('request');
 const template = require('../../templates');
 
@@ -21,7 +22,7 @@ function replyWithSearch(bot, message, query) {
 
   request(endpoint, (err, response, body) => {
     if (err || response.statusCode !== 200) {
-      return console.log('[error]', err, response.statusCode);
+      return debug(err);
     }
 
     let results = JSON.parse(body).results;
