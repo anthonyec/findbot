@@ -3,7 +3,7 @@
 # findbot
 A Slack bot chat interface to interact with Signal Noise's internal search API.
 
-Read more about it [on my website](https://anthonycossins.com/findbot)
+Read more about it [on my website](https://anthonycossins.com/work/findbot/)
 
 ## Requirments
 - Node
